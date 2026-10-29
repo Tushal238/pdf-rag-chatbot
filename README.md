@@ -1,308 +1,196 @@
+# DocuMind AI — Local PDF RAG Assistant
 
+A document intelligence application that lets users ask questions about PDF files, generate structured summaries, and compare two documents using a locally running language model.
 
-\# Multi-PDF RAG Chatbot
+## Overview
 
+DocuMind AI combines Retrieval-Augmented Generation (RAG), semantic search, vector storage, and local LLM inference to help users explore their documents through a Streamlit interface.
 
+## Features
 
-A Retrieval-Augmented Generation (RAG) application that allows users
+- **PDF Upload and Indexing:** Extract and index PDF text for retrieval.
+- **Ask Questions:** Ask natural-language questions about indexed documents.
+- **Source Passages:** Inspect retrieved passages, filenames, and page references supporting answers.
+- **PDF Summarization:** Generate structured summaries with an overview, key points, important details, and conclusion.
+- **PDF Comparison:** Compare two PDFs for similarities, differences, and unique information.
+- **Markdown Export:** Download generated summaries and comparisons.
+- **Local LLM Inference:** Use Ollama with the `llama3.2:3b` model.
+- **Interactive UI:** Use a Streamlit-based document workspace.
 
-to upload multiple PDF documents and ask questions about their content
+## Tech Stack
 
-using a locally running Large Language Model.
+| Technology | Purpose |
+|---|---|
+| Python | Application logic |
+| Streamlit | Web interface |
+| ChromaDB | Vector database and persistent storage |
+| Sentence Transformers | Text embeddings |
+| Ollama | Local language model inference |
+| Llama 3.2 3B | Answer generation, summarization, and comparison |
+| PyMuPDF | PDF text extraction |
 
-
-
-\## Features
-
-
-
-\- Upload multiple PDF documents.
-
-\- Extract text from PDFs using PyMuPDF.
-
-\- Split extracted text into overlapping chunks.
-
-\- Generate embeddings using Sentence Transformers.
-
-\- Store and retrieve document chunks using ChromaDB.
-
-\- Generate context-grounded answers using Ollama and Llama 3.2.
-
-\- Display source PDF names and page numbers.
-
-\- View retrieval cosine distances.
-
-\- Delete indexed documents.
-
-\- Evaluate retrieval performance using test questions.
-
-\- Interactive chat interface built with Streamlit.
-
-
-
-\## Tech Stack
-
-
-
-\- Python
-
-\- Streamlit
-
-\- PyMuPDF
-
-\- Sentence Transformers
-
-\- ChromaDB
-
-\- Ollama
-
-\- Llama 3.2
-
-
-
-\## Project Structure
-
-
+## Architecture
 
 ```text
-
-pdf-rag-chatbot/
-
-├── app.py
-
-├── ingest.py
-
-├── retriever.py
-
-├── generator.py
-
-├── evaluate.py
-
-├── create\_data.py
-
-├── requirements.txt
-
-├── README.md
-
-├── .gitignore
-
-└── data/
-
-&#x20;   └── rag\_guide.pdf
-
+                PDF Documents
+                      |
+                      v
+             PDF Text Extraction
+                      |
+                      v
+              Text Chunking
+                      |
+                      v
+           Sentence Transformer
+                 Embeddings
+                      |
+                      v
+               ChromaDB Store
+                      |
+          +-----------+-----------+
+          |           |           |
+          v           v           v
+       PDF Chat    Summarize    Compare PDFs
+          |           |           |
+          v           v           v
+       Retrieve    Document     Two-document
+       Relevant     Context      Contexts
+       Chunks          |           |
+          |            +-----+-----+
+          +------------------+
+                     |
+                     v
+               Ollama LLM
+                     |
+                     v
+             Streamlit Results
 ```
 
+## Project Structure
 
+```text
+pdf-rag-chatbot/
+├── app.py
+├── ingest.py
+├── retriever.py
+├── generator.py
+├── document_tools.py
+├── evaluate.py
+├── create_data.py
+├── requirements.txt
+├── README.md
+├── .gitignore
+└── data/
+    └── rag_guide.pdf
+```
 
-The `chroma\_db/` directory stores the local vector database.
+The `chroma_db/` directory stores the local vector database and should not be committed to Git.
 
-It is excluded from Git using `.gitignore`.
+## Requirements
 
+- Python 3.11 or a compatible Python version supported by the installed dependencies
+- Ollama installed and running
+- Git
+- Required Python packages listed in `requirements.txt`
 
+## Installation
 
-\## How It Works
-
-
-
-1\. Upload PDF documents through the Streamlit interface.
-
-2\. Extract text from each PDF.
-
-3\. Split the text into overlapping chunks.
-
-4\. Convert chunks into vector embeddings.
-
-5\. Store embeddings and metadata in ChromaDB.
-
-6\. Retrieve relevant chunks for a user question.
-
-7\. Pass the retrieved context to the local language model.
-
-8\. Display the generated answer and retrieved source information.
-
-
-
-\## Installation
-
-
-
-\### 1. Clone the repository
-
-
+### 1. Clone the repository
 
 ```bash
-
-git clone YOUR\_GITHUB\_REPOSITORY\_URL
-
+git clone https://github.com/Tushal238/pdf-rag-chatbot.git
 cd pdf-rag-chatbot
-
 ```
 
+### 2. Create a virtual environment
 
-
-Replace `YOUR\_GITHUB\_REPOSITORY\_URL` with your repository URL.
-
-
-
-\### 2. Create and activate a virtual environment
-
-
-
-Windows CMD:
-
-
+Windows:
 
 ```cmd
-
 python -m venv venv
-
-venv\\Scripts\\activate
-
+venv\Scripts\activate
 ```
 
+### 3. Install dependencies
 
-
-\### 3. Install dependencies
-
-
-
-```cmd
-
+```bash
 python -m pip install -r requirements.txt
-
 ```
 
+### 4. Install and start the Ollama model
 
+Pull the model:
 
-\### 4. Install Ollama
-
-
-
-Install Ollama from:
-
-
-
-https://ollama.com/
-
-
-
-Download the model:
-
-
-
-```cmd
-
+```bash
 ollama pull llama3.2:3b
-
 ```
 
+Ensure Ollama is running before using the application. If it is not running automatically, start it with:
 
+```bash
+ollama serve
+```
 
-Make sure Ollama is running before asking questions.
+If the model is already downloaded, you do not need to pull it again.
 
+### 5. Launch the application
 
-
-\### 5. Start the application
-
-
-
-```cmd
-
+```bash
 python -m streamlit run app.py --server.fileWatcherType none
-
 ```
 
+Open the local URL shown in the terminal, usually:
 
+`http://localhost:8501`
 
-Open the local URL displayed in the terminal, usually:
+## How to Use
 
+1. Open DocuMind AI in your browser.
+2. Upload one or more PDF documents using the sidebar.
+3. Click **Process documents** to extract, chunk, embed, and index the content.
+4. Open **Chat with PDFs** to ask questions about your documents.
+5. Inspect the retrieved source passages and page references.
+6. Open **Summarize PDF** to generate a structured summary.
+7. Open **Compare PDFs**, select two different indexed documents, and generate a comparison.
+8. Download summaries and comparison results as Markdown files.
 
+## Retrieval Evaluation
 
-http://localhost:8501
+The project includes `evaluate.py` to evaluate retrieval behavior using test questions.
 
+An earlier local evaluation reported:
 
+- Hit@5: 100% across three answerable test cases
+- MRR@5: 1.0000
+- Out-of-context tests passed: 1/1
 
-\## Usage
+These results are from a small test set and do not guarantee general retrieval accuracy or answer correctness.
 
+## Current Limitations
 
+- Retrieval and generation quality depend on PDF text extraction, chunking, embeddings, and the local model.
+- Scanned PDFs may require OCR if they do not contain extractable text.
+- Summaries and comparisons are limited by the amount of document context supplied to the model.
+- Local inference performance depends on available system resources.
+- Generated answers should be checked against the original documents for important decisions.
 
-1\. Upload one or more PDF files in the sidebar.
+## Future Improvements
 
-2\. Click \*\*Process PDFs\*\*.
+- OCR support for scanned PDFs
+- More comprehensive retrieval and answer evaluation
+- Improved document management across application sessions
+- Page-level source navigation
+- More efficient processing of long documents
+- Automated tests and deployment improvements
 
-3\. Enter a question in the chat input.
+## Author
 
-4\. Read the generated answer.
+**Tushal**
 
-5\. Expand the retrieved sources section to inspect PDF names,
+- GitHub: [Tushal238](https://github.com/Tushal238)
+- Project Repository: [PDF RAG Chatbot](https://github.com/Tushal238/pdf-rag-chatbot)
 
-&#x20;  page numbers and cosine distances.
+---
 
-
-
-\## Evaluation
-
-
-
-Run the basic retrieval evaluation script:
-
-
-
-```cmd
-
-python evaluate.py
-
-```
-
-
-
-The script checks whether expected PDF sources appear among
-
-the retrieved chunks and prints generated answers.
-
-
-
-\## Limitations
-
-
-
-\- Scanned PDFs may require OCR before text can be extracted.
-
-\- Answer quality depends on document quality and retrieval relevance.
-
-\- The language model may occasionally produce unsupported information.
-
-\- Cosine distance is a similarity signal, not a guarantee of correctness.
-
-\- The application requires sufficient local resources to run the model.
-
-
-
-\## Future Improvements
-
-
-
-\- Better handling of duplicate filenames and document versions.
-
-\- Improved retrieval filtering and ranking.
-
-\- More comprehensive answer evaluation.
-
-\- OCR support for scanned documents.
-
-\- Exportable chat history.
-
-\- Improved document inventory and management.
-
-
-
-\## License
-
-
-
-Choose and add an appropriate open-source license before distributing
-
-the project.
-
-
+Built as a hands-on project exploring Retrieval-Augmented Generation, vector search, local LLMs, and document intelligence.
 
