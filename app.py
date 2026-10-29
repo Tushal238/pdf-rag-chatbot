@@ -206,6 +206,103 @@ st.markdown(
         padding: 25px 0 10px 0;
     }
 
+    
+    /* DocuMind AI: premium 3D depth and motion */
+    html { scroll-behavior: smooth; }
+    .stApp {
+        background:
+            radial-gradient(ellipse at 8% 5%, rgba(91,76,230,.16), transparent 34%),
+            radial-gradient(ellipse at 92% 12%, rgba(14,165,233,.10), transparent 32%),
+            linear-gradient(145deg, #080D1D 0%, #10172B 48%, #0B1222 100%);
+        color: #EDF2FF; font-family: 'Inter', sans-serif;
+    }
+    [data-testid="stHeader"] { background: rgba(8,13,29,.72); backdrop-filter: blur(18px); }
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, rgba(17,24,43,.98), rgba(10,16,31,.98));
+        border-right: 1px solid rgba(148,163,184,.17);
+    }
+    [data-testid="stSidebar"] * { color: #E5EBFF; }
+    .brand, .section-title, .hero h1, .metric-value, .feature-title { color: #F4F7FF; }
+    .brand span { color: #B8AEFF; text-shadow: 0 0 22px rgba(139,92,246,.55); }
+    .hero {
+        position: relative; overflow: hidden;
+        background: radial-gradient(circle at 85% 18%, rgba(139,92,246,.28), transparent 28%),
+                    linear-gradient(135deg, rgba(30,41,78,.96), rgba(17,25,48,.92));
+        border: 1px solid rgba(167,139,250,.30); border-radius: 26px; padding: 32px;
+        margin: 10px 0 26px; box-shadow: 0 22px 60px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.10);
+        transition: transform 320ms ease, box-shadow 320ms ease, border-color 320ms ease;
+        animation: documind-fade-up 650ms ease both;
+    }
+    .hero:hover {
+        transform: perspective(1200px) rotateX(1deg) translateY(-2px);
+        box-shadow: 0 28px 72px rgba(0,0,0,.34), 0 0 34px rgba(99,102,241,.10);
+        border-color: rgba(167,139,250,.48);
+    }
+    .hero-label { color: #B8AEFF; }
+    .hero p, .metric-label, .feature-description { color: #AAB6D1; }
+    .metric-card, .feature-card {
+        background: linear-gradient(145deg, rgba(28,38,67,.96), rgba(17,25,46,.96));
+        border: 1px solid rgba(148,163,184,.18); border-radius: 18px;
+        box-shadow: 0 14px 30px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.055);
+        transform: perspective(1000px) translateZ(0);
+        transition: transform 260ms cubic-bezier(.2,.8,.2,1), box-shadow 260ms ease, border-color 260ms ease;
+        animation: documind-fade-up 550ms ease both;
+    }
+    .metric-card:hover, .feature-card:hover {
+        transform: perspective(1000px) translateY(-6px) rotateX(1deg) rotateY(-.5deg);
+        border-color: rgba(129,140,248,.48);
+        box-shadow: 0 24px 44px rgba(0,0,0,.30), 0 0 24px rgba(99,102,241,.10), inset 0 1px 0 rgba(255,255,255,.10);
+    }
+    .metric-value { text-shadow: 0 0 20px rgba(129,140,248,.18); }
+    .feature-icon { filter: drop-shadow(0 0 10px rgba(129,140,248,.26)); }
+    .stButton > button {
+        border-radius: 12px; border: 1px solid rgba(148,163,184,.22);
+        background: rgba(30,41,69,.82); color: #EEF2FF; min-height: 42px;
+        box-shadow: 0 6px 16px rgba(0,0,0,.12);
+        transition: transform 180ms ease, box-shadow 220ms ease, border-color 220ms ease, filter 220ms ease;
+    }
+    .stButton > button:hover {
+        transform: translateY(-2px); border-color: rgba(167,139,250,.60);
+        box-shadow: 0 10px 24px rgba(79,70,229,.20); filter: brightness(1.08);
+    }
+    .stButton > button:active { transform: translateY(0) scale(.985); }
+    .stButton > button[kind="primary"] {
+        background: linear-gradient(115deg, #635BFF 0%, #8B5CF6 52%, #3B82F6 100%);
+        border: 1px solid rgba(196,181,253,.42); color: white;
+        box-shadow: 0 9px 24px rgba(99,91,255,.28);
+    }
+    .stButton > button[kind="primary"]:hover { box-shadow: 0 13px 32px rgba(99,91,255,.38); }
+    [data-testid="stChatMessage"] {
+        background: linear-gradient(145deg, rgba(26,36,62,.96), rgba(16,24,44,.96));
+        border: 1px solid rgba(148,163,184,.17); border-radius: 17px;
+        box-shadow: 0 10px 24px rgba(0,0,0,.14); animation: documind-fade-up 320ms ease both;
+    }
+    [data-testid="stExpander"], [data-testid="stFileUploader"] {
+        background: rgba(20,29,52,.72); border: 1px solid rgba(148,163,184,.20); border-radius: 14px;
+    }
+    [data-testid="stTabs"] [role="tablist"] { gap: 8px; border-bottom: 1px solid rgba(148,163,184,.18); }
+    [data-testid="stTabs"] button[role="tab"] { border-radius: 12px 12px 0 0; color: #AAB6D1; transition: background 200ms ease, color 200ms ease; }
+    [data-testid="stTabs"] button[role="tab"][aria-selected="true"] {
+        color: #FFFFFF; background: linear-gradient(180deg, rgba(99,91,255,.20), rgba(99,91,255,.04));
+        border-bottom-color: #8B5CF6;
+    }
+    [data-testid="stMarkdownContainer"] p, [data-testid="stMarkdownContainer"] li { color: #D5DEF3; line-height: 1.72; }
+    [data-testid="stCaptionContainer"], .footer { color: #8795B4; }
+    [data-testid="stTextInput"] input, [data-testid="stChatInput"] textarea,
+    [data-testid="stSelectbox"] div[data-baseweb="select"] > div {
+        background: rgba(15,23,42,.88); color: #F1F5FF; border-color: rgba(148,163,184,.24); border-radius: 12px;
+    }
+    [data-testid="stProgress"] > div > div { background: linear-gradient(90deg, #6366F1, #A78BFA, #38BDF8); }
+    .footer { border-top: 1px solid rgba(148,163,184,.13); margin-top: 28px; }
+    @keyframes documind-fade-up {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+    @media (max-width: 768px) { .hero { padding: 22px; border-radius: 20px; } .metric-card, .feature-card { border-radius: 14px; } }
+
     </style>
     """,
     unsafe_allow_html=True,
@@ -852,6 +949,38 @@ with tab_compare:
                     use_container_width=True,
                 )
 
+/* Improve chat input styling for dark theme */
+[data-testid="stChatInput"] {
+    background: rgba(20, 29, 52, 0.96) !important;
+    border: 1px solid rgba(148, 163, 184, 0.28) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22) !important;
+}
+
+[data-testid="stChatInput"] textarea {
+    background: transparent !important;
+    color: #F1F5FF !important;
+}
+
+[data-testid="stChatInput"] textarea::placeholder {
+    color: #94A3B8 !important;
+}
+
+[data-testid="stChatInput"] button {
+    background: linear-gradient(135deg, #6366F1, #8B5CF6) !important;
+    color: white !important;
+    border-radius: 10px !important;
+}
+
+/* Smooth tab interaction */
+[data-testid="stTabs"] button[role="tab"] {
+    transition: all 220ms ease !important;
+}
+
+[data-testid="stTabs"] button[role="tab"]:hover {
+    background: rgba(139, 92, 246, 0.12) !important;
+    color: #FFFFFF !important;
+}
 # ==================================================
 # FOOTER
 # ==================================================
@@ -864,3 +993,4 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
