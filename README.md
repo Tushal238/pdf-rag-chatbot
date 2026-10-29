@@ -6,6 +6,21 @@ A document intelligence application that lets users ask questions about PDF file
 
 DocuMind AI combines Retrieval-Augmented Generation (RAG), semantic search, vector storage, and local LLM inference to help users explore their documents through a Streamlit interface.
 
+## Application Preview
+
+### Dashboard
+![DocuMind AI Dashboard](screenshots/dashboard.png)
+
+### Chat with PDFs
+![PDF Chat](screenshots/chat.png)
+
+### PDF Summary
+![PDF Summary](screenshots/summary.png)
+
+### PDF Comparison
+![PDF Comparison](screenshots/comparison.png)
+
+
 ## Features
 
 - **PDF Upload and Indexing:** Extract and index PDF text for retrieval.
